@@ -1,4 +1,4 @@
-# Transcription Script README
+# README
 
 ## Overview
 This Python script performs audio transcription using the AssemblyAI API. It uploads an audio file, transcribes it, and retrieves the transcription results.
