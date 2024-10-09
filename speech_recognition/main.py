@@ -53,11 +53,18 @@ def get_transcription_result_url(audio_url):
     while True:
         data = poll(transcript_id)
         
-        if data['status']=='completed':
-            return data,None
-        elif data['status']=='error':
-            return data,data["error"]
-    
-audio_url=upload(filename)
-data,error =get_transcription_result_url(audio_url)
-print(data)
+        if data:
+            if data['status'] == 'completed':
+                return data, None
+            elif data['status'] == 'error':
+                return None, data.get('error', 'Unknown error')
+            else:
+                print(f"Current status: {data['status']}. Polling again in 5 seconds...")
+        else:
+            return None, 'Failed to retrieve job status.'
+
+        time.sleep(5)  # Delay between polls
+
+# Main execution
+audio_url = upload(filename)
+data, error = get_transcription_result_url(audio_url)print(data)
