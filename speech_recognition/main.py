@@ -1,3 +1,4 @@
+import time
 import requests  
 from api_secrets import API_KEY_ASSEMBLY
 import sys
